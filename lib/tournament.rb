@@ -4,19 +4,51 @@ class Tournament
   include Messages
   attr_reader :total_games_played,
               :total_games_won_by_player,
-              :total_games_won_by_computer
+              :total_games_won_by_computer,
+              :game,
+              :games
 
   def initialize
     @total_games_played = 0
     @total_games_won_by_player = 0
     @total_games_won_by_computer = 0
+    @games = []
   end
 
-  def first_game(game)
-    game.board.create_board
-    game.welcome
+  def welcome_tournament
+    welcome_message
+    level_choice
+    user_level = gets.chomp.upcase
+    analyze_game(user_level)
+  end
+
+  def first_game
+    @game.board.create_board
+    @game.welcome
     # game.board.render_board
-    game.start_game
+    @game.start_game
+  end
+
+  def analyze_game(level)
+    if level == 'B' || level == 'BEGINNER'
+      @game = Game.new(self)
+      @games << @game
+      @game.board.create_board
+      @game.board.render_board
+      @game.start_game
+    elsif level == 'I' || level == 'INTERMEDIATE'
+      @game = Game.new(self, 2)
+      @games << @game
+      @game.board.create_board
+      @game.board.render_board
+      @game.start_game
+    elsif  level == 'A' || level == 'ADVANCED'
+      @game = Game.new(self, 3)
+      @games << @game
+      @game.board.create_board
+      @game.board.render_board
+      @game.start_game
+    end
   end
 
   def add_winner(winner, win_manner)
