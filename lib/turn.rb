@@ -81,7 +81,7 @@ class Turn
     ords_in_a_row(type)
     element_row_count(type)
 
-    if element_row_count(type).any? {|element| element >= 4}
+    if element_row_count(type).any? { |element| element >= find_ideal_number_consecutive }
       any_horizontal_match(type)
       assign_win_type('horizontal')
       any_horizontal_match(type).flatten.include?(true)
@@ -120,12 +120,12 @@ class Turn
 
   def any_horizontal_match(type)
     ords_in_a_row(type).map do |row|
-      if row.count > 4
-        options = row.each_cons(4).to_a
+      if row.count > find_ideal_number_consecutive
+        options = row.each_cons(find_ideal_number_consecutive).to_a
         options.map do |option|
           @board.group_ord_number_by_row.include?(option)
         end
-      elsif row.count == 4
+      elsif row.count == find_ideal_number_consecutive
         @board.group_ord_number_by_row.include?(row)
       end
     end
@@ -137,7 +137,7 @@ class Turn
     ords_in_a_column(type)
     element_column_count(type)
 
-    if element_column_count(type).any? {|element| element >= 4}
+    if element_column_count(type).any? { |element| element >= find_ideal_number_consecutive }
       any_vertical_match(type)
       assign_win_type('vertical')
       any_vertical_match(type).include?(true)

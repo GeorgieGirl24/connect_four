@@ -113,7 +113,7 @@ class Board
   end
 
   def group_ord_number_by_row
-    ord_numbers_by_row[0].each_cons(4).to_a
+    ord_numbers_by_row[0].each_cons(find_grouping).to_a
   end
 
   def ord_numbers_by_column
@@ -125,7 +125,7 @@ class Board
   end
 
   def group_ord_number_by_column
-    ord_numbers_by_column[0].each_cons(4).to_a
+    ord_numbers_by_column[0].each_cons(find_grouping).to_a
   end
 
   # def find_all_right_diagonal_cells(cell)
@@ -203,6 +203,16 @@ class Board
       all_possible_coor_diagonal = diagonal_group.uniq.select do |coordinate|
           (alphabet_range.include?(coordinate[0])) && (coordinate[1].to_i > 0) && (coordinate[1].to_i <= @height)
       end
+    end
+  end
+
+  def find_grouping
+    if @height == 6 && @width == 7
+      4
+    elsif @height == 8 && @width == 9
+      5
+    elsif @height ==10 && @width == 11
+      6
     end
   end
 end

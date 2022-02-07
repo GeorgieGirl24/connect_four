@@ -11,27 +11,37 @@ class Game
   attr_reader :board,
               :player,
               :computer,
-              :tournament,
               :messages,
               :player_places,
               :computer_places,
               :win_type,
-              :winner
+              :winner,
+              :tournament
 
-  def initialize(tournament)
+  def initialize(tournament, level=1)
     @tournament = tournament
-    @board = Board.new
+    @board = analyze_board(level)
     @player = Player.new(@board.alphabet_range)
-    @computer = Computer.new(@board.alphabet_range)
+    @computer = Computer.new(@board.alphabet_range, level)
     @player_places = []
     @computer_places = []
     @win_type
     @winner = ''
   end
 
+  def analyze_board(level)
+    if level == 1
+      Board.new
+    elsif level == 2
+      Board.new(8, 9)
+    elsif level == 3
+      Board.new(10, 11)
+    end
+  end
+
   def welcome
     puts
-    welcome_message
+    # welcome_message
     @board.render_board
   end
 
@@ -107,10 +117,9 @@ class Game
   end
 
   def restart
-    game = Game.new(@tournament)
-    game.board.create_board
-    game.board.render_board
-    game.start_game
+    level_choice
+    user_level = gets.chomp.upcase
+    @tournament.analyze_game(user_level)
   end
 
   def restart?(reply)

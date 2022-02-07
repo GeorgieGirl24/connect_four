@@ -2,12 +2,22 @@ require "colorize"
 # require 'colorized_string'
 module Messages
   def welcome_message
+    puts
     puts 'Welcome to Connect Four!'+ " " + 'In this game, you will be matched up against me, the Computer of your nightmares, for a battle of whits.'
     puts 'Your moves will be marked with an' + ' X'.magenta + ' and mine will be marked with an ' +  'O'.blue + '.'
     puts 'The first one to get four of our markers in a row will win! These four pieces can be lined up horizontally, verticaly or diagonally for a win!'
     puts 'If there is no winner, the game will be called a draw when the whole board is filled with our pieces.'
     puts "Good luck! You'll need it, as I am a fierce competitor!"
     puts
+  end
+
+  def level_choice
+    puts 'You have your choice of how hard this game will be!'
+    puts 'A' + '(b)eginner'.blue + ' level will mean you need to get four markers in a row. The board will be 6 x 7.'
+    puts 'A' + '(i)ntermediate'.yellow + ' level will mean you need to get five markers in a row. The board will be 8 x 9.'
+    puts 'A' + '(a)dvanced'.red + ' level will mean you need to get six markers in a row. The board will be 10 x 11.'
+    puts 'Please indicate which level you would like to choose.'
+    print '>'
   end
 
   def player_choose_first_column(alphabet_range)
