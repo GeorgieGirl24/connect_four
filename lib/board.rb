@@ -61,7 +61,7 @@ class Board
   end
 
   def colorize_range(header)
-      require 'pry';binding.pry
+
   end
 
   def update_cell(column, type)
@@ -69,8 +69,8 @@ class Board
   end
 
   def find_largest_empty_cell_in_column(column)
-    find_all_empty_cells_in_column(column).max_by do |cell|
-      cell.coordinates.chars[1]
+    find_all_empty_cells_in_column(column).max do |cell|
+      cell.coordinates.chars.drop(1).join.to_i
     end
   end
 
@@ -127,10 +127,6 @@ class Board
   def group_ord_number_by_column
     ord_numbers_by_column[0].each_cons(find_grouping).to_a
   end
-
-  # def find_all_right_diagonal_cells(cell)
-  #   require 'pry';binding.pry
-  # end
 
   def group_by_right_diagonal(col_idx, col_height=4)
     # this will be an array filled with coordinates or nil
