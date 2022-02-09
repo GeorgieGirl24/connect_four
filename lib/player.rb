@@ -10,7 +10,6 @@ class Player
   end
 
   def column_selection
-    # require 'pry';binding.pry
     @column_choice = player_column_choice
     player_confirmation(player_column_choice)
   end

@@ -61,7 +61,7 @@ class Board
   end
 
   def colorize_range(header)
-      require 'pry';binding.pry
+
   end
 
   def update_cell(column, type)
@@ -127,10 +127,6 @@ class Board
   def group_ord_number_by_column
     ord_numbers_by_column[0].each_cons(find_grouping).to_a
   end
-
-  # def find_all_right_diagonal_cells(cell)
-  #   require 'pry';binding.pry
-  # end
 
   def group_by_right_diagonal(col_idx, col_height=4)
     # this will be an array filled with coordinates or nil
