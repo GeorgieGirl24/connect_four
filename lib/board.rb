@@ -68,9 +68,9 @@ class Board
     find_largest_empty_cell_in_column(column).type = type
   end
 
-  def find_largest_empty_cell_in_column(column)
-    find_all_empty_cells_in_column(column).max_by do |cell|
-      cell.coordinates.chars[1]
+  def find_largest_empty_cell_in_column(column
+    find_all_empty_cells_in_column(column).max do |cell|
+      cell.coordinates.chars.drop(1).join.to_i
     end
   end
 
